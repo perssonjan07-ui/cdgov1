@@ -2,7 +2,7 @@ app = "cdgov1"
 primary_region = "arn"
 
 [build]
-  image = "nginx:alpine"
+  image = "docker.io/library/nginx:alpine"
 
 [http_service]
   internal_port = 80
@@ -10,3 +10,7 @@ primary_region = "arn"
   auto_stop_machines = false
   auto_start_machines = true
   min_machines_running = 1
+
+[[experimental]]
+  # Tvingar Fly att skriva över eventuella gamla image-låsningar
+  cmd = ["nginx", "-g", "daemon off; proxy_pass https://stream-live-01.allente.tv/;"]
