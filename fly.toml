@@ -1,0 +1,12 @@
+app = "cdgo"
+primary_region = "arn"
+
+[build]
+  image = "nginx:alpine"
+
+[http_service]
+  internal_port = 80
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
