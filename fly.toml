@@ -2,7 +2,7 @@ app = "cdgov1"
 primary_region = "arn"
 
 [build]
-  image = "docker.io/library/nginx:alpine"
+  image = "docker.io/library/caddy:alpine"
 
 [http_service]
   internal_port = 80
@@ -12,5 +12,5 @@ primary_region = "arn"
   min_machines_running = 1
 
 [[experimental]]
-  # Tvingar Fly att skriva över eventuella gamla image-låsningar
-  cmd = ["nginx", "-g", "daemon off; proxy_pass https://stream-live-01.allente.tv/;"]
+  # Startar Caddy som en ren reverse/forward-proxy
+  cmd = ["caddy", "reverse-proxy", "--from", ":80", "--to", "http://127.0.0.1:80"]
