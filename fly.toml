@@ -2,7 +2,7 @@ app = "cdgov1"
 primary_region = "arn"
 
 [build]
-  image = "docker.io/library/caddy:alpine"
+  image = "docker.io/library/nginx:alpine"
 
 [http_service]
   internal_port = 80
@@ -11,6 +11,6 @@ primary_region = "arn"
   auto_start_machines = true
   min_machines_running = 1
 
-[[experimental]]
-  # Startar Caddy som en ren reverse/forward-proxy
-  cmd = ["caddy", "reverse-proxy", "--from", ":80", "--to", "http://127.0.0.1:80"]
+# Fly.io:s officiella sätt att skicka med startkommandon utan att krascha valideringen
+[experimental]
+  exec = ["nginx", "-g", "daemon off;"]
